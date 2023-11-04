@@ -9,8 +9,8 @@ public class Calculator {
     private final int LAST_PREFIX_INDEX = 4;
     private final int CUSTOM_DELIMITER_INDEX = 2;
 
-    public int sumAll(String input) {
-        if (input.isBlank()) {
+    public int sum(String input) {
+        if (isNullOrBlank(input)) {
             return 0;
         }
 
@@ -21,6 +21,10 @@ public class Calculator {
         }
 
         return getSum(makeStringToIntArray(delimiter, input));
+    }
+
+    private boolean isNullOrBlank(String input) {
+        return input == null || input.isBlank();
     }
 
     private String updateCustomDelimiter(String input) {
@@ -46,7 +50,7 @@ public class Calculator {
         return checkCondition(stringToInt(stringNumber));
     }
 
-    private Integer stringToInt(String stringNumber) {
+    private int stringToInt(String stringNumber) {
         try {
             return Integer.parseInt(stringNumber);
         } catch (Exception e) {
@@ -54,7 +58,7 @@ public class Calculator {
         }
     }
 
-    private Integer checkCondition(Integer number) {
+    private int checkCondition(int number) {
         if (number < 0) {
             throw new RuntimeException("음수 값이 존재합니다.");
         }

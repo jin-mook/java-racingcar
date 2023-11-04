@@ -23,7 +23,18 @@ class CalculatorTest {
         // given
         String input = "";
         // when
-        int result = calculator.sumAll(input);
+        int result = calculator.sum(input);
+        // then
+        assertThat(result).isZero();
+    }
+
+    @Test
+    @DisplayName("null 값이 들어오면 0을 반환합니다.")
+    void returnZeroIfNull() {
+        // given
+        String input = null;
+        // when
+        int result = calculator.sum(input);
         // then
         assertThat(result).isZero();
     }
@@ -33,7 +44,7 @@ class CalculatorTest {
     void sumAll(String input) {
         // given
         // when
-        int result = calculator.sumAll(input);
+        int result = calculator.sum(input);
         // then
         assertThat(result).isEqualTo(6);
     }
@@ -45,7 +56,7 @@ class CalculatorTest {
         String input = "1,str,2";
         // when
         // then
-        assertThatThrownBy(() -> calculator.sumAll(input))
+        assertThatThrownBy(() -> calculator.sum(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("숫자 이외의 값이 존재합니다.");
     }
@@ -57,7 +68,7 @@ class CalculatorTest {
         String input = "1,-1:1";
         // when
         // then
-        assertThatThrownBy(() -> calculator.sumAll(input))
+        assertThatThrownBy(() -> calculator.sum(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("음수 값이 존재합니다.");
     }
@@ -68,7 +79,7 @@ class CalculatorTest {
         // given
         String input = "//;\\n1,2:3;4";
         // when
-        int result = calculator.sumAll(input);
+        int result = calculator.sum(input);
         // then
         assertThat(result).isEqualTo(10);
     }
